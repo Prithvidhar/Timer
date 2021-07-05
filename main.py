@@ -31,21 +31,32 @@ def main():
     root.columnconfigure(0, weight = 1)
     root.columnconfigure(1, weight = 1)
     root.columnconfigure(3, weight=1)
+
+    style = ttk.Style()
+    style.configure('Header.TLabel', foreground = 'orange', font = ('Ariel, 24, bold'))
     #adding icon to window
     icon = PhotoImage(file = 'timePoot.png')
     root.iconphoto(False, icon)
+
+    frameH = ttk.Frame(root, height = 50, width = 270)
+    frameH.grid(row = 0, column = 0, columnspan =2)
+
+    headLabel = ttk.Label(frameH, text = 'Timer', font = ('Arial', '24','bold'), foreground = 'red')
+    headLabel.place(anchor = 'nw', x = 175, y = 0)
     #adding input for user
 
-    minLabel = ttk.Label(root,text = 'minutes:').grid(row = 0, column = 0)
-    min = StringVar()
-    minSpin = Spinbox(root,from_ = 0, to = 60, textvariable = min).grid(column = 1,row = 0)
+    minLabel = ttk.Label(root,text = 'minutes:')
+    minLabel.grid(row = 1, column = 0)
 
-    secLabel = ttk.Label(root, text='seconds:').grid(column = 2, row = 0)
+    min = StringVar()
+    minSpin = Spinbox(root,from_ = 0, to = 60, textvariable = min).grid(column = 1,row = 1)
+
+    secLabel = ttk.Label(root, text='seconds:').grid(column = 2, row = 1)
     sec = StringVar()
-    secSpin = Spinbox(root, from_=0, to=60, textvariable=sec).grid(column = 3, row = 0)
+    secSpin = Spinbox(root, from_=0, to=60, textvariable=sec).grid(column = 3, row = 1)
 
     # adding button to start timer
-    startB = ttk.Button(root, text = 'start', command = lambda : startTimer(min.get(), sec.get())).grid(row = 2, column = 1, columnspan = 3)
+    startB = ttk.Button(root, text = 'start', command = lambda : startTimer(min.get(), sec.get())).grid(row = 3, column = 0, columnspan = 4)
 
     root.mainloop()
 
